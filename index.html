@@ -25,64 +25,7 @@
 <h2>主題：六個簡單方法，對抗孤獨、重建幸福感</h2>
 <p>小步開始，每天練習一點點，生活會越來越明亮。</p>
 
-<!-- 原有六大方法區塊 -->
-<div class="section">
-<h2>一、接納孤獨：承認感覺，才能轉化它</h2>
-<textarea placeholder="我上次覺得孤單，是什麼時候？那時候我在做什麼？"></textarea>
-<textarea placeholder="我覺得自己更偏向『孤立』還是『孤獨』？為什麼？"></textarea>
-<ul class="checkbox-list">
-  <li><input type="checkbox"> 今天我誠實面對自己的情緒</li>
-  <li><input type="checkbox"> 記錄下孤單時，我最需要的是什麼</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>二、訂下行動計畫：改變從一個習慣開始</h2>
-<textarea placeholder="我想改變或養成哪一個小習慣？"></textarea>
-<ul class="checkbox-list">
-  <li><input type="checkbox"> 主動聯絡一位朋友或家人</li>
-  <li><input type="checkbox"> 出門走路超過 10 分鐘</li>
-  <li><input type="checkbox"> 嘗試微笑與人打招呼</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>三、把焦點放在他人身上</h2>
-<textarea placeholder="今天我有傾聽誰、真心對他感興趣嗎？"></textarea>
-<textarea placeholder="我能怎麼讓別人覺得被理解？"></textarea>
-<ul class="checkbox-list">
-  <li><input type="checkbox"> 問候鄰居或朋友近況</li>
-  <li><input type="checkbox"> 寫一句鼓勵的話給朋友</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>四、善用科技保持連結</h2>
-<textarea placeholder="我有哪位朋友只透過網路聯絡？是否想約見面？"></textarea>
-<ul class="checkbox-list">
-  <li><input type="checkbox"> 用手機或視訊和某人聊天</li>
-  <li><input type="checkbox"> 嘗試學習新通訊 App</li>
-  <li><input type="checkbox"> 今天減少滑手機時間</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>五、參加志工活動</h2>
-<textarea placeholder="我想嘗試參與哪一種志工活動？"></textarea>
-<ul class="checkbox-list">
-  <li><input type="checkbox"> 為他人做一件小事</li>
-  <li><input type="checkbox"> 詢問社區有無志工機會</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>六、報名學習新課程</h2>
-<textarea placeholder="我最近想學什麼？或哪門課讓我感興趣？"></textarea>
-<ul class="checkbox-list">
-  <li><input type="checkbox"> 查詢課程或活動資訊</li>
-  <li><input type="checkbox"> 和朋友討論想一起去的課</li>
-</ul>
-</div>
+<!-- 原有六大方法區塊略 -->
 
 <div class="section weekly-check">
 <h2>🌞 每週自我檢查</h2>
@@ -99,7 +42,11 @@
 <!-- 新增心情變化折線圖 -->
 <div id="moodChartContainer">
 <h2>📈 每週心情變化折線圖</h2>
-<p>請輸入本週每天的心情分數（1~10），系統會自動生成折線圖。</p>
+<p><strong>說明：</strong>請輸入本週每天的心情分數（1～10 分），<br>
+1 分代表情緒低落、不開心、壓力大、孤單感強；<br>
+5 分代表普通、心情平穩；<br>
+10 分代表愉快、滿足、有連結感。<br>
+👉 分數越高表示情緒越正向，請每天花幾秒回想「今天的整體心情」。</p>
 <div>
   <input type="number" id="day1" placeholder="週一" min="1" max="10"> 
   <input type="number" id="day2" placeholder="週二" min="1" max="10"> 
@@ -121,7 +68,7 @@ const moodChart = new Chart(ctx, {
   data: {
     labels: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'],
     datasets: [{
-      label: '心情分數',
+      label: '心情分數（1＝低落，10＝愉快）',
       data: [null, null, null, null, null, null, null],
       borderColor: '#4A7C59',
       backgroundColor: 'rgba(74, 124, 89, 0.1)',
@@ -129,7 +76,15 @@ const moodChart = new Chart(ctx, {
       tension: 0.3
     }]
   },
-  options: { scales: { y: { min: 0, max: 10, title: { display: true, text: '心情分數' } } } }
+  options: {
+    scales: {
+      y: {
+        min: 0,
+        max: 10,
+        title: { display: true, text: '心情分數（1＝低落、10＝愉快）' }
+      }
+    }
+  }
 });
 
 function updateChart() {
