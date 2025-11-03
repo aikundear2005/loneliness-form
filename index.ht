@@ -1,1 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>樂齡心理健康學習單：六個對抗孤獨的生活練習</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body { font-family: 'Noto Sans TC', sans-serif; margin: 20px; background-color: #fafafa; color: #333; }
+  h1, h2 { color: #4A7C59; }
+  .section { background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 24px; padding: 20px; }
+  textarea, input[type=text] { width: 100%; padding: 8px; margin-top: 8px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px; font-size: 1em; }
+  .checkbox-list { list-style-type: none; padding: 0; }
+  .checkbox-list li { margin-bottom: 6px; }
+  .weekly-check table { width: 100%; border-collapse: collapse; }
+  .weekly-check th, .weekly-check td { border: 1px solid #ccc; text-align: center; padding: 6px; }
+  #moodChartContainer { background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 20px; margin-top: 20px; }
+  #saveBtn { background-color: #4A7C59; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; margin-top: 10px; }
+  #saveBtn:hover { background-color: #3f6d4f; }
+  footer { text-align: center; color: #777; margin-top: 20px; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<h1>💛 樂齡心理健康學習單</h1>
+<h2>主題：六個簡單方法，對抗孤獨、重建幸福感</h2>
+<p>小步開始，每天練習一點點，生活會越來越明亮。</p>
 
+<!-- 原有六大方法區塊 -->
+<div class="section">
+<h2>一、接納孤獨：承認感覺，才能轉化它</h2>
+<textarea placeholder="我上次覺得孤單，是什麼時候？那時候我在做什麼？"></textarea>
+<textarea placeholder="我覺得自己更偏向『孤立』還是『孤獨』？為什麼？"></textarea>
+<ul class="checkbox-list">
+  <li><input type="checkbox"> 今天我誠實面對自己的情緒</li>
+  <li><input type="checkbox"> 記錄下孤單時，我最需要的是什麼</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>二、訂下行動計畫：改變從一個習慣開始</h2>
+<textarea placeholder="我想改變或養成哪一個小習慣？"></textarea>
+<ul class="checkbox-list">
+  <li><input type="checkbox"> 主動聯絡一位朋友或家人</li>
+  <li><input type="checkbox"> 出門走路超過 10 分鐘</li>
+  <li><input type="checkbox"> 嘗試微笑與人打招呼</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>三、把焦點放在他人身上</h2>
+<textarea placeholder="今天我有傾聽誰、真心對他感興趣嗎？"></textarea>
+<textarea placeholder="我能怎麼讓別人覺得被理解？"></textarea>
+<ul class="checkbox-list">
+  <li><input type="checkbox"> 問候鄰居或朋友近況</li>
+  <li><input type="checkbox"> 寫一句鼓勵的話給朋友</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>四、善用科技保持連結</h2>
+<textarea placeholder="我有哪位朋友只透過網路聯絡？是否想約見面？"></textarea>
+<ul class="checkbox-list">
+  <li><input type="checkbox"> 用手機或視訊和某人聊天</li>
+  <li><input type="checkbox"> 嘗試學習新通訊 App</li>
+  <li><input type="checkbox"> 今天減少滑手機時間</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>五、參加志工活動</h2>
+<textarea placeholder="我想嘗試參與哪一種志工活動？"></textarea>
+<ul class="checkbox-list">
+  <li><input type="checkbox"> 為他人做一件小事</li>
+  <li><input type="checkbox"> 詢問社區有無志工機會</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>六、報名學習新課程</h2>
+<textarea placeholder="我最近想學什麼？或哪門課讓我感興趣？"></textarea>
+<ul class="checkbox-list">
+  <li><input type="checkbox"> 查詢課程或活動資訊</li>
+  <li><input type="checkbox"> 和朋友討論想一起去的課</li>
+</ul>
+</div>
+
+<div class="section weekly-check">
+<h2>🌞 每週自我檢查</h2>
+<table>
+  <tr><th>指標</th><th>😊做得很好</th><th>😐還可以</th><th>😔需要努力</th></tr>
+  <tr><td>每天有與人互動</td><td><input type="radio" name="a1"></td><td><input type="radio" name="a1"></td><td><input type="radio" name="a1"></td></tr>
+  <tr><td>感覺被傾聽、被關心</td><td><input type="radio" name="a2"></td><td><input type="radio" name="a2"></td><td><input type="radio" name="a2"></td></tr>
+  <tr><td>有幫助別人或分享心情</td><td><input type="radio" name="a3"></td><td><input type="radio" name="a3"></td><td><input type="radio" name="a3"></td></tr>
+  <tr><td>有參與學習或社區活動</td><td><input type="radio" name="a4"></td><td><input type="radio" name="a4"></td><td><input type="radio" name="a4"></td></tr>
+  <tr><td>覺得自己比上週更開心</td><td><input type="radio" name="a5"></td><td><input type="radio" name="a5"></td><td><input type="radio" name="a5"></td></tr>
+</table>
+</div>
+
+<!-- 新增心情變化折線圖 -->
+<div id="moodChartContainer">
+<h2>📈 每週心情變化折線圖</h2>
+<p>請輸入本週每天的心情分數（1~10），系統會自動生成折線圖。</p>
+<div>
+  <input type="number" id="day1" placeholder="週一" min="1" max="10"> 
+  <input type="number" id="day2" placeholder="週二" min="1" max="10"> 
+  <input type="number" id="day3" placeholder="週三" min="1" max="10"> 
+  <input type="number" id="day4" placeholder="週四" min="1" max="10"> 
+  <input type="number" id="day5" placeholder="週五" min="1" max="10"> 
+  <input type="number" id="day6" placeholder="週六" min="1" max="10"> 
+  <input type="number" id="day7" placeholder="週日" min="1" max="10"> 
+  <button onclick="updateChart()">更新圖表</button>
+  <button id="saveBtn" onclick="saveChart()">下載圖表圖片</button>
+</div>
+<canvas id="moodChart" width="400" height="180"></canvas>
+</div>
+
+<script>
+const ctx = document.getElementById('moodChart').getContext('2d');
+const moodChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'],
+    datasets: [{
+      label: '心情分數',
+      data: [null, null, null, null, null, null, null],
+      borderColor: '#4A7C59',
+      backgroundColor: 'rgba(74, 124, 89, 0.1)',
+      fill: true,
+      tension: 0.3
+    }]
+  },
+  options: { scales: { y: { min: 0, max: 10, title: { display: true, text: '心情分數' } } } }
+});
+
+function updateChart() {
+  const values = [];
+  for (let i = 1; i <= 7; i++) {
+    const val = parseFloat(document.getElementById(`day${i}`).value);
+    values.push(isNaN(val) ? null : val);
+  }
+  moodChart.data.datasets[0].data = values;
+  moodChart.update();
+}
+
+function saveChart() {
+  const link = document.createElement('a');
+  link.download = '我的心情變化圖.png';
+  link.href = document.getElementById('moodChart').toDataURL('image/png');
+  link.click();
+}
+</script>
+
+<footer>
+<p>🌼 記得：孤單不是沒有人，而是失去了連結。主動伸出手，就會有人在另一端回應你。</p>
+</footer>
+</body>
+</html>
