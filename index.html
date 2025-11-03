@@ -1,44 +1,136 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>樂齡心理健康學習單：六個方法與心情流動</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>樂齡心理健康學習單：智慧心情流動圖</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-  body { font-family: 'Noto Sans TC', sans-serif; margin: 20px; background-color: #fafafa; color: #333; line-height: 1.6; }
-  h1, h2 { color: #4A7C59; }
-  .section { background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 24px; padding: 20px; border-left: 6px solid #4A7C59; }
-  .method1 { border-left-color: #5B8C5A; }
-  .method2 { border-left-color: #E8A87C; }
-  .method3 { border-left-color: #77B1D3; }
-  .method4 { border-left-color: #B497BD; }
-  .method5 { border-left-color: #A3B18A; }
-  .method6 { border-left-color: #C19A6B; }
-  textarea { width: 100%; min-height: 60px; padding: 8px; margin-top: 8px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px; font-size: 1em; }
+  body {
+    font-family: "Noto Sans TC", sans-serif;
+    margin: 20px;
+    background-color: #fffdf5;
+    color: #333;
+    line-height: 1.6;
+  }
+  h1, h2 { color: #4a7c59; }
+  .section {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+    padding: 20px;
+    border-left: 6px solid #4a7c59;
+  }
+  .method1 { border-left-color: #5b8c5a; }
+  .method2 { border-left-color: #e8a87c; }
+  .method3 { border-left-color: #77b1d3; }
+  .method4 { border-left-color: #b497bd; }
+  .method5 { border-left-color: #a3b18a; }
+  .method6 { border-left-color: #c19a6b; }
+  textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+  }
   .checkbox-list { list-style-type: none; padding: 0; }
   .checkbox-list li { margin-bottom: 6px; }
-  button { background-color: #4A7C59; color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; margin: 5px; }
+  button {
+    background-color: #4a7c59;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin: 5px;
+  }
   button:hover { background-color: #3f6d4f; }
   .mood-section { font-size: 1.1em; }
-  .mood-select { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  #daySelector { font-size: 1.1em; padding: 6px; border-radius: 6px; border: 1px solid #aaa; }
-  .mood-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .mood-buttons button { flex: 1 1 80px; font-size: 1.1em; padding: 10px; border-radius: 8px; }
-  #selectedDay { margin-top: 8px; color: #4A7C59; font-weight: bold; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
-  canvas { margin-top: 20px; }
-  .legend { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
-  .legend-item { display: flex; align-items: center; gap: 6px; }
-  .color-box { width: 18px; height: 18px; border-radius: 4px; }
-  footer { text-align: center; color: #777; margin-top: 20px; font-size: 0.9em; }
+  .mood-select {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  #daySelector {
+    font-size: 1.1em;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+  }
+  .mood-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .mood-buttons button {
+    flex: 1 1 80px;
+    font-size: 1.1em;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  #selectedDay {
+    margin-top: 8px;
+    color: #4a7c59;
+    font-weight: bold;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: center;
+  }
+  canvas {
+    margin-top: 20px;
+    background-color: #fffdf5;
+    border-radius: 8px;
+  }
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .color-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+  }
+  footer {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+    font-size: 0.9em;
+  }
+  #moodSuggestion {
+    margin-top: 12px;
+    font-size: 1.1em;
+    text-align: center;
+    color: #4a7c59;
+    font-weight: 500;
+  }
 </style>
 </head>
 <body>
 <h1>💛 樂齡心理健康學習單</h1>
 <h2>主題：六個簡單方法，對抗孤獨、重建幸福感</h2>
 <p>小步開始，每天練習一點點，生活會越來越明亮。</p>
+
+<!-- 六大方法 -->
 <div class="section method1">
 <h2>一、接納孤獨：承認感覺，才能轉化它</h2>
 <textarea placeholder="我上次覺得孤單，是什麼時候？那時候我在做什麼？"></textarea>
@@ -48,6 +140,7 @@
   <li><input type="checkbox"> 記錄下孤單時，我最需要的是什麼</li>
 </ul>
 </div>
+
 <div class="section method2">
 <h2>二、訂下行動計畫：改變從一個習慣開始</h2>
 <textarea placeholder="我想改變或養成哪一個小習慣？"></textarea>
@@ -57,6 +150,7 @@
   <li><input type="checkbox"> 嘗試微笑與人打招呼</li>
 </ul>
 </div>
+
 <div class="section method3">
 <h2>三、把焦點放在他人身上</h2>
 <textarea placeholder="今天我有傾聽誰、真心對他感興趣嗎？"></textarea>
@@ -66,6 +160,7 @@
   <li><input type="checkbox"> 寫一句鼓勵的話給朋友</li>
 </ul>
 </div>
+
 <div class="section method4">
 <h2>四、善用科技保持連結</h2>
 <textarea placeholder="我有哪位朋友只透過網路聯絡？是否想約見面？"></textarea>
@@ -75,6 +170,7 @@
   <li><input type="checkbox"> 今天減少滑手機時間</li>
 </ul>
 </div>
+
 <div class="section method5">
 <h2>五、參加志工活動</h2>
 <textarea placeholder="我想嘗試參與哪一種志工活動？"></textarea>
@@ -83,6 +179,7 @@
   <li><input type="checkbox"> 詢問社區有無志工機會</li>
 </ul>
 </div>
+
 <div class="section method6">
 <h2>六、報名學習新課程</h2>
 <textarea placeholder="我最近想學什麼？或哪門課讓我感興趣？"></textarea>
@@ -91,6 +188,8 @@
   <li><input type="checkbox"> 和朋友討論想一起去的課</li>
 </ul>
 </div>
+
+<!-- 每週自我檢查 -->
 <div class="section weekly-check">
 <h2>🌞 每週自我檢查</h2>
 <table>
@@ -102,6 +201,8 @@
   <tr><td>覺得自己比上週更開心</td><td><input type="radio" name="a5"></td><td><input type="radio" name="a5"></td><td><input type="radio" name="a5"></td></tr>
 </table>
 </div>
+
+<!-- 心情區塊 -->
 <div class="section mood-section">
 <h2>💬 今天的心情</h2>
 <p>選擇日期與感受，幫自己留下小小記錄：</p>
@@ -119,33 +220,60 @@
 <p id="selectedDay"></p>
 <p id="feedback" style="margin-top:10px; font-size:1.1em; color:#4A7C59;"></p>
 </div>
+
+<!-- 心情流動圖 -->
 <div class="section">
 <h2>📈 我的心情流動圖</h2>
 <canvas id="moodChart" width="400" height="200"></canvas>
+<p id="chartDate" style="text-align:center; color:#777; font-size:0.9em;"></p>
 <div class="legend">
-  <div class="legend-item"><div class="color-box" style="background-color:#547980"></div>低落</div>
-  <div class="legend-item"><div class="color-box" style="background-color:#77A1A0"></div>還好</div>
-  <div class="legend-item"><div class="color-box" style="background-color:#A8C686"></div>平靜</div>
-  <div class="legend-item"><div class="color-box" style="background-color:#F1E189"></div>開朗</div>
-  <div class="legend-item"><div class="color-box" style="background-color:#FFD66B"></div>幸福</div>
+  <div class="legend-item"><div class="color-box" style="background-color:#B0C4DE"></div>低落</div>
+  <div class="legend-item"><div class="color-box" style="background-color:#9FD9B0"></div>還好</div>
+  <div class="legend-item"><div class="color-box" style="background-color:#F6E3A1"></div>平靜</div>
+  <div class="legend-item"><div class="color-box" style="background-color:#FFD480"></div>開朗</div>
+  <div class="legend-item"><div class="color-box" style="background-color:#FFB6B9"></div>幸福</div>
 </div>
+<p id="moodSuggestion"></p>
 <button onclick="saveChart()">📥 下載我的心情流動圖</button>
 </div>
+
+<!-- 每週小結 -->
 <div class="section">
 <h2>📔 每週小結</h2>
 <p>這週我最大的收穫是什麼？下週我想試著多做些什麼？</p>
 <textarea id="weeklySummary" placeholder="寫下你的想法或感受..."></textarea>
 </div>
+
 <button onclick="clearAllData()" style="background-color:#b43f3f;">🧹 清除所有紀錄</button>
+
 <script>
 const days = ['週一','週二','週三','週四','週五','週六','週日'];
 const ctx = document.getElementById('moodChart').getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+gradient.addColorStop(0, 'rgba(255, 212, 128, 0.6)');
+gradient.addColorStop(1, 'rgba(255, 182, 185, 0.2)');
 const moodChart = new Chart(ctx, {
   type: 'line',
-  data: { labels: days, datasets: [{ data: new Array(7).fill(null), borderColor: '#4A7C59', backgroundColor: 'rgba(74,124,89,0.2)', fill: true, tension: 0.4, pointBackgroundColor: new Array(7).fill('#ccc') }]},
-  options: { plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 5, ticks: { display: false }, grid: { display: false } } } }
+  data: {
+    labels: days,
+    datasets: [{
+      data: new Array(7).fill(null),
+      borderColor: '#4A7C59',
+      backgroundColor: gradient,
+      fill: true,
+      tension: 0.4,
+      pointRadius: 6,
+      pointBackgroundColor: new Array(7).fill('#ccc')
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: { y: { min: 0, max: 5, ticks: { display: false }, grid: { display: false } } }
+  }
 });
-const colors = ['#547980','#77A1A0','#A8C686','#F1E189','#FFD66B'];
+
+const colors = ['#B0C4DE','#9FD9B0','#F6E3A1','#FFD480','#FFB6B9'];
+
 function initDaySelector() {
   const selector = document.getElementById('daySelector');
   selector.innerHTML = '';
@@ -160,34 +288,59 @@ function initDaySelector() {
   updateSelectedDayLabel();
   selector.addEventListener('change', updateSelectedDayLabel);
 }
+
 function updateSelectedDayLabel() {
   const dayIndex = document.getElementById('daySelector').value;
   document.getElementById('selectedDay').textContent = `目前選擇的是：${days[dayIndex]}`;
 }
+
 function recordMood(level, label) {
   const dayIndex = document.getElementById('daySelector').value;
   moodChart.data.datasets[0].data[dayIndex] = level;
   moodChart.data.datasets[0].pointBackgroundColor[dayIndex] = colors[level - 1];
   moodChart.update();
   document.getElementById('feedback').textContent = `已記錄 ${days[dayIndex]} 的心情：${label}`;
+  updateMoodSuggestion();
   saveToLocalStorage();
 }
+
+function updateMoodSuggestion() {
+  const data = moodChart.data.datasets[0].data.filter(v => v !== null);
+  if (data.length === 0) return;
+  const avg = data.reduce((a,b)=>a+b,0)/data.length;
+  const diff = data[data.length-1] - data[0];
+  let suggestion = '';
+  if (diff > 1 && avg > 3) suggestion = '🌈 你這週越來越開朗，繼續保持與人互動，幸福正在擴散喔！';
+  else if (diff < -1) suggestion = '☁️ 這週可能有點低潮，別忘了給自己小小休息與關心。';
+  else if (avg >= 3 && avg < 4) suggestion = '🌿 穩定是幸福的基礎，適度嘗試新活動，讓心情多些亮點！';
+  else suggestion = '🌊 情緒有起伏很正常，試著記錄觸動你的時刻，會有新發現。';
+  document.getElementById('moodSuggestion').textContent = suggestion;
+}
+
 function saveChart() {
   const canvas = document.getElementById('moodChart');
+  const now = new Date();
+  const weekNum = getWeekNumber(now);
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - now.getDay() + 1);
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+  const weekRange = `${startOfWeek.toLocaleDateString()}~${endOfWeek.toLocaleDateString()}`;
+  document.getElementById('chartDate').textContent = `我的心情流動圖｜${weekRange}`;
   canvas.toBlob(function(blob) {
-    const weekNum = getWeekNumber(new Date());
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `我的心情流動_${new Date().getFullYear()}W${weekNum}.png`;
+    link.download = `我的心情流動_${now.getFullYear()}W${weekNum}_${weekRange}.png`;
     link.click();
   });
 }
+
 function getWeekNumber(d) {
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-  return weekNo;
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
+
 function saveToLocalStorage() {
   const data = {
     textareas: Array.from(document.querySelectorAll('textarea')).map(t => t.value),
@@ -198,29 +351,6 @@ function saveToLocalStorage() {
   };
   localStorage.setItem('moodData', JSON.stringify(data));
 }
+
 function loadFromLocalStorage() {
   const data = JSON.parse(localStorage.getItem('moodData'));
-  if (!data) return;
-  document.querySelectorAll('textarea').forEach((t, i) => t.value = data.textareas[i] || '');
-  document.querySelectorAll('input[type=\"checkbox\"]').forEach((c, i) => c.checked = !!data.checkboxes[i]);
-  document.querySelectorAll('input[type=\"radio\"]').forEach((r, i) => r.checked = !!data.radios[i]);
-  if (data.chart) {
-    moodChart.data.datasets[0].data = data.chart;
-    moodChart.data.datasets[0].pointBackgroundColor = data.colors;
-    moodChart.update();
-  }
-}
-function clearAllData() {
-  if (confirm('確定要清除所有紀錄嗎？此動作無法復原。')) {
-    localStorage.removeItem('moodData');
-    location.reload();
-  }
-}
-document.addEventListener('input', saveToLocalStorage);
-window.onload = () => { initDaySelector(); loadFromLocalStorage(); };
-</script>
-<footer>
-<p>🌼  記得：孤單不是沒有人，而是失去了連結。主動伸出手，就會有人在另一端回應你。</p>
-</footer>
-</body>
-</html>
