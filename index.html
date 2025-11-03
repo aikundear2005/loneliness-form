@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>💛 樂活漫步，探索人生：六個方法與心情流動圖</title>
+<title>💛 樂活漫步，探索人生：七個方法與心情流動圖</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   body { font-family: 'Noto Sans TC', sans-serif; margin: 20px; background-color: #FFFDF5; color: #333; line-height: 1.6; }
@@ -12,9 +12,10 @@
   .method1 { border-left-color: #5B8C5A; }
   .method2 { border-left-color: #E8A87C; }
   .method3 { border-left-color: #77B1D3; }
-  .method4 { border-left-color: #B497BD; }
-  .method5 { border-left-color: #A3B18A; }
-  .method6 { border-left-color: #C19A6B; }
+  .method4 { border-left-color: #F0B6B2; }
+  .method5 { border-left-color: #B497BD; }
+  .method6 { border-left-color: #A3B18A; }
+  .method7 { border-left-color: #C19A6B; }
   textarea { width: 100%; min-height: 60px; padding: 8px; margin-top: 8px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 6px; font-size: 1em; }
   .checkbox-list { list-style-type: none; padding: 0; }
   .checkbox-list li { margin-bottom: 6px; }
@@ -39,10 +40,10 @@
 <body>
 
 <h1>💛 樂活漫步，探索人生</h1>
-<h2>主題：六個簡單方法，對抗孤獨、重建幸福感</h2>
+<h2>主題：七個簡單方法，對抗孤獨、重建幸福感</h2>
 <p>小步開始，每天練習一點點，生活會越來越明亮。</p>
 
-<!-- 六大方法 -->
+<!-- 一～七個方法 -->
 <div class="section method1">
 <h2>一、接納孤獨：承認感覺，才能轉化它</h2>
 <textarea placeholder="我上次覺得孤單，是什麼時候？那時候我在做什麼？"></textarea>
@@ -74,7 +75,19 @@
 </div>
 
 <div class="section method4">
-<h2>四、善用科技保持連結</h2>
+<h2>四、練習關愛自己：照顧內在，也是一種力量</h2>
+<p>我願意給自己一些空間與善意。當我能對自己溫柔一點，就更能真誠地對待他人。</p>
+<textarea placeholder="最近，我對自己太嚴苛的地方是什麼？"></textarea>
+<textarea placeholder="如果我是一位朋友，我會怎麼安慰現在的自己？"></textarea>
+<ul class="checkbox-list">
+  <li><input type="checkbox"> 🫶 今天給自己一個鼓勵的微笑</li>
+  <li><input type="checkbox"> ☕ 為自己準備一份喜歡的小點心</li>
+  <li><input type="checkbox"> 🌿 做一件讓自己放鬆的事（散步、聽音樂、泡澡）</li>
+</ul>
+</div>
+
+<div class="section method5">
+<h2>五、善用科技保持連結</h2>
 <textarea placeholder="我有哪位朋友只透過網路聯絡？是否想約見面？"></textarea>
 <ul class="checkbox-list">
   <li><input type="checkbox"> 用手機或視訊和某人聊天</li>
@@ -83,8 +96,8 @@
 </ul>
 </div>
 
-<div class="section method5">
-<h2>五、參加志工活動</h2>
+<div class="section method6">
+<h2>六、參加志工活動</h2>
 <textarea placeholder="我想嘗試參與哪一種志工活動？"></textarea>
 <ul class="checkbox-list">
   <li><input type="checkbox"> 為他人做一件小事</li>
@@ -92,8 +105,8 @@
 </ul>
 </div>
 
-<div class="section method6">
-<h2>六、報名學習新課程</h2>
+<div class="section method7">
+<h2>七、報名學習新課程</h2>
 <textarea placeholder="我最近想學什麼？或哪門課讓我感興趣？"></textarea>
 <ul class="checkbox-list">
   <li><input type="checkbox"> 查詢課程或活動資訊</li>
@@ -101,7 +114,6 @@
 </ul>
 </div>
 
-<!-- 每週自我檢查 -->
 <div class="section">
 <h2>🌞 每週自我檢查</h2>
 <table>
@@ -114,7 +126,7 @@
 </table>
 </div>
 
-<!-- 心情選擇 -->
+<!-- 💬 今天的心情 -->
 <div class="section mood-section">
 <h2>💬 今天的心情</h2>
 <p>選擇日期與感受，幫自己留下小小記錄：</p>
@@ -133,7 +145,7 @@
 <p id="feedback" style="margin-top:10px; font-size:1.1em; color:#4A7C59;"></p>
 </div>
 
-<!-- 心情流動圖 -->
+<!-- 📈 我的心情流動圖 -->
 <div class="section">
 <h2>📈 我的心情流動圖</h2>
 <canvas id="moodChart" width="400" height="200"></canvas>
@@ -150,7 +162,7 @@
 <button onclick="saveChart()">📥 下載我的心情流動圖</button>
 </div>
 
-<!-- 每週小結 -->
+<!-- 📔 每週小結 -->
 <div class="section">
 <h2>📔 每週小結</h2>
 <p>這週我最大的收穫是什麼？下週我想試著多做些什麼？</p>
@@ -168,101 +180,138 @@ const gradient=ctx.createLinearGradient(0,0,0,200);
 gradient.addColorStop(0,'rgba(255,212,128,0.5)');
 gradient.addColorStop(1,'rgba(255,182,185,0.2)');
 
-const moodChart=new Chart(ctx,{type:'line',data:{labels:days,datasets:[{data:new Array(7).fill(null),borderColor:'#4A7C59',backgroundColor:gradient,fill:true,tension:0.4,pointRadius:6,pointBackgroundColor:new Array(7).fill('#ccc')}]},options:{plugins:{legend:{display:false}},scales:{y:{min:0,max:5,ticks:{display:false},grid:{display:false}}}}});
+const moodChart=new Chart(ctx,{
+  type:'line',
+  data:{
+    labels:days,
+    datasets:[{
+      data:new Array(7).fill(null),
+      borderColor:'#4A7C59',
+      backgroundColor:gradient,
+      fill:true,
+      tension:0.4,
+      pointRadius:6,
+      pointBackgroundColor:new Array(7).fill('#ccc')
+    }]
+  },
+  options:{
+    plugins:{ legend:{ display:false }},
+    scales:{ y:{ min:0, max:5, ticks:{ display:false }, grid:{ display:false }}}
+  }
+});
 
 function initDaySelector(){
- const s=document.getElementById('daySelector');
- s.innerHTML='';
- days.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d;s.appendChild(o);});
- const t=new Date().getDay();
- s.value=t===0?6:t-1;
- updateSelectedDayLabel();
- s.addEventListener('change',updateSelectedDayLabel);
+  const s=document.getElementById('daySelector');
+  s.innerHTML='';
+  days.forEach((d,i)=>{
+    const o=document.createElement('option');
+    o.value=i; o.textContent=d;
+    s.appendChild(o);
+  });
+  const t=new Date().getDay();
+  s.value=t===0?6:t-1;
+  updateSelectedDayLabel();
+  s.addEventListener('change',updateSelectedDayLabel);
 }
+
 function updateSelectedDayLabel(){
- const i=document.getElementById('daySelector').value;
- document.getElementById('selectedDay').textContent=`目前選擇的是：${days[i]}`;
+  const i=document.getElementById('daySelector').value;
+  document.getElementById('selectedDay').textContent=`目前選擇的是：${days[i]}`;
 }
+
 function recordMood(level,label){
- const i=document.getElementById('daySelector').value;
- moodChart.data.datasets[0].data[i]=level;
- moodChart.data.datasets[0].pointBackgroundColor[i]=colors[level-1];
- moodChart.update();
- document.getElementById('feedback').textContent=`已記錄 ${days[i]} 的心情：${label}`;
- updateMoodSuggestion();
- saveToLocalStorage();
-}
-function updateMoodSuggestion(){
- const data=moodChart.data.datasets[0].data.filter(v=>v!==null);
- if(data.length===0)return;
- const avg=data.reduce((a,b)=>a+b,0)/data.length;
- const diff=data[data.length-1]-data[0];
- let suggestion='';
- if(diff>1&&avg>3)suggestion='🌈 你這週越來越開朗，繼續保持與人互動，幸福正在擴散喔！';
- else if(diff<-1)suggestion='☁️ 這週可能有點低潮，別忘了給自己小小休息與關心。';
- else if(avg>=3&&avg<4)suggestion='🌿 穩定是幸福的基礎，適度嘗試新活動，讓心情多些亮點！';
- else suggestion='🌊 情緒有起伏很正常，試著記錄觸動你的時刻，會有新發現。';
- document.getElementById('moodSuggestion').textContent=suggestion;
-}
-function saveChart(){
- const canvas=document.getElementById('moodChart');
- const now=new Date();
- const weekNum=getWeekNumber(now);
- const start=new Date(now);
- start.setDate(now.getDate()-now.getDay()+1);
- const end=new Date(start);
- end.setDate(start.getDate()+6);
- const range=`${start.toLocaleDateString()}–${end.toLocaleDateString()}`;
- const title=`💛 樂齡心理健康學習單｜我的心情流動圖｜${range}`;
- const temp=document.createElement('canvas');
- temp.width=canvas.width; temp.height=canvas.height+40;
- const tctx=temp.getContext('2d');
- tctx.fillStyle="#FFFDF5"; tctx.fillRect(0,0,temp.width,temp.height);
- tctx.font="16px Noto Sans TC"; tctx.fillStyle="#4A7C59";
- tctx.fillText(title,20,25);
- tctx.drawImage(canvas,0,40);
- temp.toBlob(function(blob){
-   const link=document.createElement('a');
-   link.href=URL.createObjectURL(blob);
-   link.download=`我的心情流動_${now.getFullYear()}W${weekNum}_${range}.png`;
-   link.click();
- });
-}
-function getWeekNumber(d){d=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));const y=new Date(Date.UTC(d.getUTCFullYear(),0,1));return Math.ceil((((d-y)/86400000)+1)/7);}
-function saveToLocalStorage(){
- const data={
-  textareas:Array.from(document.querySelectorAll('textarea')).map(t=>t.value),
-  checkboxes:Array.from(document.querySelectorAll('input[type="checkbox"]')).map(c=>c.checked),
-  radios:Array.from(document.querySelectorAll('input[type="radio"]')).map(r=>r.checked),
-  chart:moodChart.data.datasets[0].data,
-  colors:moodChart.data.datasets[0].pointBackgroundColor
- };
- localStorage.setItem('moodData',JSON.stringify(data));
-}
-function loadFromLocalStorage(){
- const data=JSON.parse(localStorage.getItem('moodData'));
- if(!data)return;
- document.querySelectorAll('textarea').forEach((t,i)=>t.value=data.textareas[i]||'');
- document.querySelectorAll('input[type="checkbox"]').forEach((c,i)=>c.checked=!!data.checkboxes[i]);
- document.querySelectorAll('input[type="radio"]').forEach((r,i)=>r.checked=!!data.radios[i]);
- if(data.chart){
-  moodChart.data.datasets[0].data=data.chart;
-  moodChart.data.datasets[0].pointBackgroundColor=data.colors;
+  const i=document.getElementById('daySelector').value;
+  moodChart.data.datasets[0].data[i]=level;
+  moodChart.data.datasets[0].pointBackgroundColor[i]=colors[level-1];
   moodChart.update();
+  document.getElementById('feedback').textContent=`已記錄 ${days[i]} 的心情：${label}`;
   updateMoodSuggestion();
- }
+  saveToLocalStorage();
 }
+
+function updateMoodSuggestion(){
+  const data=moodChart.data.datasets[0].data.filter(v=>v!==null);
+  if(data.length===0)return;
+  const avg=data.reduce((a,b)=>a+b,0)/data.length;
+  const diff=data[data.length-1]-data[0];
+  let suggestion='';
+  if(diff>1&&avg>3)suggestion='🌈 你這週越來越開朗，繼續保持與人互動，幸福正在擴散喔！';
+  else if(diff<-1)suggestion='☁️ 這週可能有點低潮，別忘了給自己小小休息與關心。';
+  else if(avg>=3&&avg<4)suggestion='🌿 穩定是幸福的基礎，適度嘗試新活動，讓心情多些亮點！';
+  else suggestion='🌊 情緒有起伏很正常，試著記錄觸動你的時刻，會有新發現。';
+  document.getElementById('moodSuggestion').textContent=suggestion;
+}
+
+function saveChart(){
+  const canvas=document.getElementById('moodChart');
+  const now=new Date();
+  const weekNum=getWeekNumber(now);
+  const start=new Date(now);
+  start.setDate(now.getDate()-now.getDay()+1);
+  const end=new Date(start);
+  end.setDate(start.getDate()+6);
+  const range=`${start.toLocaleDateString()}–${end.toLocaleDateString()}`;
+  const title=`💛 樂齡心理健康學習單｜我的心情流動圖｜${range}`;
+  const temp=document.createElement('canvas');
+  temp.width=canvas.width; temp.height=canvas.height+40;
+  const tctx=temp.getContext('2d');
+  tctx.fillStyle="#FFFDF5"; tctx.fillRect(0,0,temp.width,temp.height);
+  tctx.font="16px Noto Sans TC"; tctx.fillStyle="#4A7C59";
+  tctx.fillText(title,20,25);
+  tctx.drawImage(canvas,0,40);
+  temp.toBlob(function(blob){
+    const link=document.createElement('a');
+    link.href=URL.createObjectURL(blob);
+    link.download=`我的心情流動_${now.getFullYear()}W${weekNum}_${range}.png`;
+    link.click();
+  });
+}
+
+function getWeekNumber(d){
+  d=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  const y=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d-y)/86400000)+1)/7);
+}
+
+function saveToLocalStorage(){
+  const data={
+    textareas:Array.from(document.querySelectorAll('textarea')).map(t=>t.value),
+    checkboxes:Array.from(document.querySelectorAll('input[type="checkbox"]')).map(c=>c.checked),
+    radios:Array.from(document.querySelectorAll('input[type="radio"]')).map(r=>r.checked),
+    chart:moodChart.data.datasets[0].data,
+    colors:moodChart.data.datasets[0].pointBackgroundColor
+  };
+  localStorage.setItem('moodData',JSON.stringify(data));
+}
+
+function loadFromLocalStorage(){
+  const data=JSON.parse(localStorage.getItem('moodData'));
+  if(!data)return;
+  document.querySelectorAll('textarea').forEach((t,i)=>t.value=data.textareas[i]||'');
+  document.querySelectorAll('input[type="checkbox"]').forEach((c,i)=>c.checked=!!data.checkboxes[i]);
+  document.querySelectorAll('input[type="radio"]').forEach((r,i)=>r.checked=!!data.radios[i]);
+  if(data.chart){
+    moodChart.data.datasets[0].data=data.chart;
+    moodChart.data.datasets[0].pointBackgroundColor=data.colors;
+    moodChart.update();
+    updateMoodSuggestion();
+  }
+}
+
 function clearAllData(){
- if(confirm('確定要清除所有紀錄嗎？此動作無法復原。')) {
+  if(confirm('確定要清除所有紀錄嗎？此動作無法復原。')){
     localStorage.removeItem('moodData');
     location.reload();
   }
 }
-document.addEventListener('input', saveToLocalStorage);
-window.onload = () => { initDaySelector(); loadFromLocalStorage(); };
+
+document.addEventListener('input',saveToLocalStorage);
+window.onload=()=>{initDaySelector();loadFromLocalStorage();};
 </script>
+
 <footer>
-<p>🌼  記得：孤單不是沒有人，而是失去了連結。主動伸出手，就會有人在另一端回應你。</p>
+<p>🌼 記得：孤單不是沒有人，而是失去了連結。先從對自己溫柔開始，你會發現世界也在變得溫柔。</p>
 </footer>
+
 </body>
 </html>
