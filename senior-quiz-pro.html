@@ -1,215 +1,99 @@
-<script>
-    // --- 題目資料庫 (通用包容版) ---
-    const questions = [
-        {
-            // 修改點：把「兒女」改成「親友或是晚輩」，讓單身者也能帶入「侄子/好友/鄰居」
-            title: "1. 跟親友或是晚輩住多遠，你覺得最剛好？🏠",
-            options: [
-                "👨‍👩‍👧‍👦 住在一起最熱鬧", 
-                "🍲 住隔壁 (一碗湯的距離)", 
-                "🚌 同縣市 (想看再去看)", 
-                "✈️ 越遠越好 (視訊就好)"
-            ]
-        },
-        {
-            title: "2. 只有一個人吃飯時，你會...？🍱",
-            options: [
-                "🍳 簡單煮個麵/燙青菜", 
-                "🥡 買便當/叫外送", 
-                "🧊 熱冰箱剩下的剩菜", 
-                "🦞 趁機去吃大餐"
-            ]
-        },
-        {
-            // 修改點：把「兒女」改成「信任的人」，強調的是「安全感」而非「血緣」
-            title: "3. 有個「用了就會報平安」的熱水瓶，你想用嗎？📱",
-            options: [
-                "🙆‍♀️ 想用 (讓信任的人安心)", // 修改括號內文字
-                "🙅‍♂️ 不想用 (感覺被監視)", 
-                "🤔 看是不是免費的"
-            ]
-        },
-        {
-            title: "4. 送你一個機器人，最希望它幫你做什麼？🤖",
-            options: [
-                "🧹 掃地/洗廁所", 
-                "👩‍🍳 煮飯/洗碗", 
-                "💆 按摩/搥背", 
-                "🗣️ 陪我聊天"
-            ]
-        },
-        {
-            title: "5. (偷偷問) 覺得一個人住最爽的是？🎉",
-            options: [
-                "📺 電視不用搶遙控器", 
-                "🥘 不用煩惱煮什麼", 
-                "⏰ 作息自由想睡就睡", 
-                "🩳 穿著隨便超自在"
-            ]
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>樂齡生活大哉問 (通用包容版)</title>
+    <style>
+        /* --- 全局設定 --- */
+        :root {
+            --primary: #FF8C42;
+            --secondary: #4ECDC4;
+            --bg: #FFF8E7;
+            --card-bg: #FFFFFF;
+            --text: #2C3E50;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
-    ];
 
-    // --- 結果分析資料庫 (通用包容版) ---
-    const results = [
-        {
-            type: "👑 霸氣獨立王",
-            emoji: "👑",
-            desc: "您是一個非常清楚自己要什麼的人！享受自由、不喜歡麻煩別人。對您來說，擁有獨處的時間是一種至高無上的「享受」。",
-            advice: "把時間留給自己，您就是自己人生的國王！"
-        },
-        {
-            type: "✨ 智慧生活家",
-            emoji: "✨",
-            desc: "您的心態非常年輕！對於新事物接受度高。您懂得善用工具（外送、家電）讓生活更輕鬆，是大家眼中的潮人物！",
-            advice: "保持好奇心，科技就是您的最佳神隊友。"
-        },
-        {
-            type: "❤️ 溫暖守護者",
-            emoji: "❤️",
-            // 修改點：把「孩子」改成「重要的人」，避免無子女者的失落感
-            desc: "對您來說，人與人的連結是最重要的。即使沒有住在一起，您的心也總是掛念著那些重要的人。您是個溫柔且貼心的人。",
-            advice: "照顧別人的同時，別忘了也要多愛自己一點喔！"
-        },
-        {
-            type: "🌿 樂活自由派",
-            emoji: "🌿",
-            desc: "您很隨和，覺得日子過得開心最重要。不強求完美，喜歡順其自然。您的生活充滿了小確幸，是懂得放鬆的高手。",
-            advice: "今天不用煮了，去吃頓好料的犒賞自己吧！"
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-    ];
 
-    let currentStep = 0;
-    let userAnswers = []; 
+        #app-container {
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: var(--bg);
+        }
 
-    const quizBox = document.getElementById('quiz-box');
-    const bar = document.getElementById('bar');
-    const currNum = document.getElementById('curr-num');
-    const resultScreen = document.getElementById('result-screen');
-    const headerArea = document.getElementById('header-area');
+        /* --- 頂部 --- */
+        .header { padding: 20px 0; text-align: center; transition: opacity 0.3s;}
+        .progress-track { width: 100%; height: 10px; background: #E0E0E0; border-radius: 5px; overflow: hidden; margin-top: 10px; }
+        .progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.5s ease; }
+        .step-text { font-size: 1.2rem; font-weight: bold; color: var(--primary); }
 
-    // UI 元素
-    const resTitle = document.getElementById('res-title');
-    const resDesc = document.getElementById('res-desc');
-    const resAdvice = document.getElementById('res-advice');
-    const resEmoji = document.getElementById('res-emoji');
+        /* --- 題目區 --- */
+        .quiz-wrapper { flex: 1; position: relative; overflow: hidden; }
+        .question-card {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 10px;
+            display: flex; flex-direction: column;
+            transform: translateX(100%); opacity: 0;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+        }
+        .question-card.active { transform: translateX(0); opacity: 1; pointer-events: all; }
+        .question-card.exit-left { transform: translateX(-100%) scale(0.9); opacity: 0; }
 
-    function init() {
-        renderQuestions();
-        updateProgress();
-    }
-
-    function renderQuestions() {
-        quizBox.innerHTML = '';
-        questions.forEach((q, index) => {
-            const card = document.createElement('div');
-            card.className = `question-card ${index === 0 ? 'active' : ''}`;
-            card.id = `q-${index}`;
-            
-            let html = `<div class="q-title">${q.title}</div><div class="options-grid">`;
-            q.options.forEach((opt, optIdx) => {
-                html += `<button class="option-btn" onclick="selectOption(this, ${index}, ${optIdx})">${opt}</button>`;
-            });
-            html += `</div>`;
-            
-            card.innerHTML = html;
-            quizBox.appendChild(card);
-        });
-    }
-
-    function selectOption(btn, step, optIdx) {
-        userAnswers[step] = optIdx;
-        const allBtns = btn.parentElement.children;
-        for (let b of allBtns) b.classList.remove('selected');
-        btn.classList.add('selected');
-
-        setTimeout(() => {
-            if (step < questions.length - 1) {
-                nextQuestion(step);
-            } else {
-                finishQuiz();
-            }
-        }, 400);
-    }
-
-    function nextQuestion(step) {
-        const currentCard = document.getElementById(`q-${step}`);
-        const nextCard = document.getElementById(`q-${step + 1}`);
-        currentCard.classList.remove('active');
-        currentCard.classList.add('exit-left');
-        nextCard.classList.add('active');
-        currentStep++;
-        updateProgress();
-    }
-
-    function updateProgress() {
-        currNum.innerText = currentStep + 1;
-        const percent = ((currentStep + 1) / questions.length) * 100;
-        bar.style.width = `${percent}%`;
-    }
-
-    function finishQuiz() {
-        headerArea.style.opacity = '0';
+        .q-title { font-size: 1.6rem; font-weight: 800; line-height: 1.4; margin-bottom: 30px; color: #2c3e50; }
         
-        // --- 簡易分析邏輯 ---
-        let finalResult;
-        const q4Answer = userAnswers[3]; // 第4題 (機器人)
-        const q5Answer = userAnswers[4]; // 第5題 (最爽)
+        .options-grid { display: grid; gap: 15px; }
+        .option-btn {
+            background: var(--card-bg); border: 2px solid transparent; padding: 20px;
+            border-radius: 18px; font-size: 1.3rem; text-align: left;
+            box-shadow: var(--shadow); cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+        }
+        .option-btn:active { transform: scale(0.98); background-color: #FFE0B2; }
+        .option-btn.selected { background-color: var(--primary); color: white; border-color: var(--primary); }
 
-        if (q4Answer === 3) { 
-            finalResult = results[2]; // 溫暖守護者
-        } else if (q4Answer === 0 || q4Answer === 1) {
-            finalResult = results[1]; // 智慧生活家
-        } else if (q5Answer === 3) {
-            finalResult = results[3]; // 樂活自由派
-        } else {
-            finalResult = results[0]; // 霸氣獨立王
+        /* --- 分析結果頁 --- */
+        #result-screen {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg);
+            display: flex; flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
+            padding: 40px 20px;
+        }
+        #result-screen.show { transform: translateY(0); }
+
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 400px;
+            animation: popIn 0.8s 0.2s backwards;
+            border-top: 10px solid var(--primary);
         }
 
-        resTitle.innerText = finalResult.type;
-        resEmoji.innerText = finalResult.emoji;
-        resDesc.innerText = finalResult.desc;
-        resAdvice.innerText = finalResult.advice;
-
-        resultScreen.classList.add('show');
-        startConfetti();
-    }
-
-    function startConfetti() {
-        const canvas = document.getElementById("confetti-canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        let particles = [];
-        const colors = ['#FF8C42', '#4ECDC4', '#FFD93D', '#FF6B6B', '#6C5CE7'];
-        for (let i = 0; i < 120; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height - canvas.height,
-                speed: Math.random() * 3 + 3,
-                color: colors[Math.floor(Math.random() * colors.length)],
-                size: Math.random() * 10 + 5,
-                tilt: Math.random() * 10,
-                tiltAngle: Math.random() * 10
-            });
-        }
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let active = false;
-            particles.forEach(p => {
-                p.y += p.speed;
-                p.tiltAngle += 0.1;
-                ctx.beginPath();
-                ctx.lineWidth = p.size;
-                ctx.strokeStyle = p.color;
-                ctx.moveTo(p.x + p.tilt + Math.cos(p.tiltAngle) * 10, p.y);
-                ctx.lineTo(p.x + p.tilt, p.y + p.size);
-                ctx.stroke();
-                if (p.y < canvas.height) active = true;
-            });
-            if (active) requestAnimationFrame(draw);
-        }
-        draw();
-    }
-
-    init();
-</script>
+        .result-emoji { font-size: 4rem; margin-bottom: 10px; display
