@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>長者憂鬱量表 (GDS-15) - 關心您的心情</title>
+    <style>
+        :root {
+            --primary-color: #6d9dc5;
+            --bg-color: #fdfbf7;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --select-color: #e6f2ff;
+            --warm-orange: #ffab73;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", "Heiti TC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        /* 個人資料區塊 */
+        .profile-section {
+            background-color: #f0f7fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        /* 題目區塊 */
+        .question-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* 大按鈕選項設計 */
+        .options {
+            display: flex;
+            gap: 20px;
+        }
+
+        .option-label {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        /* 隱藏原本的 radio button */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* 選中時的樣式 */
+        input[type="radio"]:checked + .option-label {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(109, 157, 197, 0.4);
+        }
+
+        /* 送出按鈕 */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background-color: var(--warm-orange);
+            color: white;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            background-color: #ff964f;
+        }
+
+        /* 結果區塊 */
+        #result-section {
+            display: none;
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #fff8f0;
+            border-radius: 20px;
+            border: 3px solid var(--warm-orange);
+            animation: fadeIn 0.5s;
+        }
+
+        .date-display {
+            font-size: 1.1em;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .score-display {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .message-display {
+            font-size: 1.4em;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .illustration {
+            max-width: 300px;
+            height: auto;
+            margin: 20px auto;
+        }
+
+        .warning {
+            color: #d9534f;
+            background-color: #f9d6d5;
+        }
+        
+        .caution {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+        }
+
+        .good {
+            color: #3c763d;
+            background-color: #dff0d8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 手機版調整 */
+        @media (max-width: 600px) {
+            .options {
+                flex-direction: column;
+                gap: 10px;
+            }
+            h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💕 長者憂鬱量表 (GDS)</h1>
+    <p class="subtitle">花一點時間，關心自己的心情</p>
+
+    <div class="profile-section">
+        <div class="input-group">
+            <label for="username">您的名字 (或暱稱)：</label>
+            <input type="text" id="username" placeholder="請輸入名字">
+        </div>
+        <div class="input-group">
+            <label for="age">您的年齡：</label>
+            <input type="number" id="age" placeholder="請輸入數字">
+        </div>
+        <div class="input-group">
+            <label>您的性別：</label>
+            <div class="options">
+                <label style="flex:1;">
+                    <input type="radio" name="gender" value="male">
+                    <div class="option-label">男</div>
+                </label>
+                <label style="flex:1;">
+                    <input type="radio" name="gender" value="female">
+                    <div class="option-label">女</div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <form id="gds-form">
+        <div id="questions-container"></div>
+        
+        <button type="button" class="submit-btn" onclick="calculateScore()">看結果</button>
+    </form>
+
+    <div id="result-section">
+        <div class="date-display" id="result-date"></div>
+        <div id="result-image-container"></div>
+        <div class="score-display" id="result-score"></div>
+        <div class="message-display" id="result-message"></div>
+        <p id="greeting-text"></p>
+        <button class="submit-btn" style="background-color: #6d9dc5; margin-top:20px;" onclick="location.reload()">重新測驗</button>
+    </div>
+</div>
+
+<script>
+    // 題目資料庫 (scoreYes: 1 代表選「是」得1分，0 代表選「是」得0分)
+    const questions = [
+        { text: "1. 對您的生活滿意嗎？", scoreYes: 0, scoreNo: 1 },
+        { text: "2. 您是否減少很多的活動和有興趣的事？", scoreYes: 1, scoreNo: 0 },
+        { text: "3. 您是否覺得您的生活很空虛？", scoreYes: 1, scoreNo: 0 },
+        { text: "4. 您是否常常感到厭煩？", scoreYes: 1, scoreNo: 0 },
+        { text: "5. 您是否大部分時間精神都很好？", scoreYes: 0, scoreNo: 1 },
+        { text: "6. 您是否會常常害怕將有不幸的事情發生在您身上？", scoreYes: 1, scoreNo: 0 },
+        { text: "7. 您是否大部分的時間都感到快樂？", scoreYes: 0, scoreNo: 1 },
+        { text: "8. 您是否常常感到無論做什麼事都沒有用？", scoreYes: 1, scoreNo: 0 },
+        { text: "9. 您是否比較喜歡待在家裡，而較不喜歡外出及不喜歡做新的事？", scoreYes: 1, scoreNo: 0 },
+        { text: "10. 您是否覺得現在有記憶力不好的困擾？", scoreYes: 1, scoreNo: 0 },
+        { text: "11. 您是否覺得【現在還能活著】是很好的事？", scoreYes: 0, scoreNo: 1 },
+        { text: "12. 您是否覺得您現在活得很沒有價值？", scoreYes: 1, scoreNo: 0 },
+        { text: "13. 您是否覺得精力很充沛？", scoreYes: 0, scoreNo: 1 },
+        { text: "14. 您是否感覺您現在的情況是沒有希望的？", scoreYes: 1, scoreNo: 0 },
+        { text: "15. 您是否覺得大部分的人都比您更幸福？", scoreYes: 1, scoreNo: 0 }
+    ];
+
+    // 初始化題目
+    const container = document.getElementById('questions-container');
+    questions.forEach((q, index) => {
+        const div = document.createElement('div');
+        div.className = 'question-item';
+        div.innerHTML = `
+            <div class="question-text">${q.text}</div>
+            <div class="options">
+                <label>
+                    <input type="radio" name="q${index}" value="yes" data-score="${q.scoreYes}">
+                    <div class="option-label">是</div>
+                </label>
+                <label>
+                    <input type="radio" name="q${index}" value="no" data-score="${q.scoreNo}">
+                    <div class="option-label">否</div>
+                </label>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+
+    // SVG 圖片生成函數 (手繪風格)
+    function getSVG(type) {
+        if (type === 'good') {
+            // 快樂的太陽
+            return `<svg class="illustration" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="60" fill="#fff3cd" stroke="#ffa000" stroke-width="3" />
+                <path d="M70 90 Q80 100 90 90 M110 90 Q120 100 130 90" stroke="#ffa000" stroke-width="3" fill="none"/>
+                <path d="M70 120 Q100 150 130 120" stroke="#ffa000" stroke-width="3" fill="none" />
+                <line x1="100" y1="20" x2="100" y2="40" stroke="#ffa000" stroke-width="3" />
+                <line x1="100" y1="160" x2="100" y2="180" stroke="#ffa000" stroke-width="3" />
+                <line x1="20" y1="100" x2="40" y2="100" stroke="#ffa000" stroke-width="3" />
+                <line x1="160" y1="100" x2="180" y2="100" stroke="#ffa000" stroke-width="3" />
+                <line x1="45" y1="45" x2="60" y2="60" stroke="#ffa000" stroke-width="3" />
+                <line x1="140" y1="140" x2="155" y2="155" stroke="#ffa000" stroke-width="3" />
+                <line x1="45" y1="155" x2="60" y2="140" stroke="#ffa000" stroke-width="3" />
+                <line x1="140" y1="60" x2="155" y2="45" stroke="#ffa000" stroke-width="3" />
+            </svg>`;
+        } else if (type === 'caution') {
+            // 溫暖的熱茶與愛心
+            return `<svg class="illustration" viewBox="0 0 200 200">
+                <path d="M50 80 L50 140 Q50 160 100 160 Q150 160 150 140 L150 80 Z" fill="#ffe0b2" stroke="#ffab73" stroke-width="3"/>
+                <path d="M150 100 Q180 100 180 120 Q180 140 150 140" fill="none" stroke="#ffab73" stroke-width="3"/>
+                <path d="M70 60 Q80 40 70 20 M100 60 Q110 40 100 20 M130 60 Q140 40 130 20" stroke="#ccc" stroke-width="2" fill="none"/>
+                <path d="M100 100 L110 110 L130 90 L110 130 L90 110 Z" fill="#ff6b6b" opacity="0.6"/>
+                <text x="100" y="190" text-anchor="middle" fill="#888" font-size="14">休息一下，喝杯茶</text>
+            </svg>`;
+        } else {
+            // 醫生/燈塔引導
+            return `<svg class="illustration" viewBox="0 0 200 200">
+                <rect x="80" y="60" width="40" height="100" fill="#fff" stroke="#6d9dc5" stroke-width="3"/>
+                <polygon points="80,60 100,30 120,60" fill="#6d9dc5"/>
+                <circle cx="100" cy="60" r="10" fill="#fff6e5" stroke="#6d9dc5" stroke-width="2"/>
+                <line x1="100" y1="60" x2="200" y2="100" stroke="#f0ad4e" stroke-width="2" stroke-dasharray="5,5"/>
+                <line x1="100" y1="60" x2="0" y2="100" stroke="#f0ad4e" stroke-width="2" stroke-dasharray="5,5"/>
+                <rect x="90" y="100" width="20" height="30" fill="#6d9dc5"/>
+                <text x="100" y="180" text-anchor="middle" fill="#6d9dc5" font-size="14">專業的協助是最好的依靠</text>
+            </svg>`;
+        }
+    }
+
+    function calculateScore() {
+        // 1. 檢查基本資料
+        const name = document.getElementById('username').value.trim();
+        const age = document.getElementById('age').value;
+        const gender = document.querySelector('input[name="gender"]:checked');
+
+        if (!name || !age || !gender) {
+            alert("請記得填寫上面的基本資料（名字、年齡和性別）喔！");
+            window.scrollTo(0, 0);
+            return;
+        }
+
+        // 2. 計算分數與檢查漏填
+        let totalScore = 0;
+        let allAnswered = true;
+
+        for (let i = 0; i < questions.length; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (!selected) {
+                allAnswered = false;
+                // 標記未填寫的題目
+                document.getElementsByClassName('question-item')[i].style.backgroundColor = "#fff0f0";
+            } else {
+                totalScore += parseInt(selected.getAttribute('data-score'));
+                document.getElementsByClassName('question-item')[i].style.backgroundColor = "transparent";
+            }
+        }
+
+        if (!allAnswered) {
+            alert("還有題目忘記勾選喔，請檢查一下紅色的區域！");
+            return;
+        }
+
+        // 3. 顯示結果
+        const now = new Date();
+        const dateStr = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`;
+        
+        document.getElementById('result-date').innerText = `測驗日期：${dateStr}`;
+        document.getElementById('result-score').innerText = `總分：${totalScore} 分`;
+        document.getElementById('greeting-text').innerText = `${name} 您好，根據您今天的測驗結果：`;
+
+        const resultMsg = document.getElementById('result-message');
+        const imgContainer = document.getElementById('result-image-container');
+
+        // 隱藏表單，顯示結果
+        document.getElementById('gds-form').style.display = 'none';
+        document.querySelector('.profile-section').style.display = 'none';
+        document.querySelector('.subtitle').style.display = 'none';
+        const resultSection = document.getElementById('result-section');
+        resultSection.style.display = 'block';
+
+        // 判斷邏輯
+        if (totalScore >= 11) {
+            resultMsg.innerHTML = "有高風險憂鬱情形<br>建議致身心科尋求專業醫療服務";
+            resultMsg.className = "message-display warning";
+            imgContainer.innerHTML = getSVG('severe');
+        } else if (totalScore >= 7) {
+            resultMsg.innerHTML = "疑有憂鬱傾向<br>可至衛生所預約相關諮詢服務喔";
+            resultMsg.className = "message-display caution";
+            imgContainer.innerHTML = getSVG('caution');
+        } else {
+            resultMsg.innerHTML = "您的心情狀態目前很平穩<br>繼續保持樂活好心情！";
+            resultMsg.className = "message-display good";
+            imgContainer.innerHTML = getSVG('good');
+        }
+        
+        // 滾動到結果
+        resultSection.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
